@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Literal, Optional
+from typing import Annotated, Any, Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -19,6 +19,7 @@ class ScanRequest(BaseModel):
     )
     location: str = Field(
         ...,
+        min_length=1,
         description=(
             "The resource to scan. "
             "For `url` and `code` (HTTP): a full URL (e.g. `https://example.com`). "
@@ -26,7 +27,7 @@ class ScanRequest(BaseModel):
         ),
         examples=["https://example.com", "/home/user/app.py"],
     )
-    patterns: list[str] = Field(
+    patterns: list[Annotated[str, Field(min_length=1)]] = Field(
         ...,
         min_length=1,
         description=(
