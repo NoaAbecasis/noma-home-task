@@ -1,16 +1,28 @@
-# This is a sample Python script.
+import uvicorn
+from fastapi import FastAPI
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from api.routes import router
 
+app = FastAPI(
+    title="Regex Scanner API",
+    version="1.0.0",
+    description=(
+        "A content scanning service that fetches text from various sources "
+        "(websites, local files, remote source code) and applies regex patterns "
+        "to detect matches — such as outbound links in HTML or import statements in code.\n\n"
+        "## Use cases\n\n"
+        "**Link extraction** — send a URL with an `<a href>` pattern to identify "
+        "all outbound links on a page, useful for detecting sites that link to "
+        "suspicious or blacklisted destinations.\n\n"
+        "**Malicious package detection** — send a source code file (local or from GitHub) "
+        "with import-statement patterns to enumerate third-party dependencies and flag "
+        "potentially malicious packages."
+    ),
+    contact={"name": "Noma Home Task"},
+    license_info={"name": "Private"},
+)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+app.include_router(router)
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
