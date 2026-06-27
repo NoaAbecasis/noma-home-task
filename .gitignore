@@ -1,13 +1,33 @@
+# Virtual environment
 .venv/
 
+# Python bytecode
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Environment variables
 .env
+.env.*
 
-*.db
-
+# IDE
 .idea/
+.vscode/
 
+# Pytest
 .pytest_cache/
+.coverage
+htmlcov/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
